@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: medical-ai-service
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: API_KEY
+        generateValue: true
+      - key: REQUIRE_API_KEY
+        value: false
+      - key: HUGGINGFACE_SPACE
+        value: Abdhack/medgemma-4b-it
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+    healthCheckPath: /health
+    autoDeploy: true
